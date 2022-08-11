@@ -18,6 +18,7 @@ public:
     };
 
     UDPFilePlayer(QString filePath);
+    ~UDPFilePlayer();
     void setBroadCastProperties(QString address, quint16 port);
     void start();
     void stop();
@@ -25,7 +26,6 @@ public:
     void resume();
 private slots:
     void streamFile();
-    void handleStateChanged(QAudio::State newState);
 private:
     void setAudioFormat();
     void connectSignalSlots();

@@ -11,16 +11,32 @@ CONFIG += c++17
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
-    udpfileplayer.cpp
+    udpfileplayer.cpp \
+    framelesswindow.cpp \
+    windowdragger.cpp \
+    DarkStyle.cpp
 
 HEADERS += \
     mainwindow.h \
-    udpfileplayer.h
+    udpfileplayer.h\
+    framelesswindow.h \
+    windowdragger.h \
+    DarkStyle.h
 
-FORMS += \
-    mainwindow.ui
+FORMS       += mainwindow.ui \
+               framelesswindow.ui
+
+
+
+
+
+
+RESOURCES   += darkstyle.qrc \
+               framelesswindow.qrc\
+               images.qrc
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+

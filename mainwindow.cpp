@@ -34,9 +34,10 @@ void MainWindow::on_stop_button_clicked()
 {
     m_udpFilePlayer->stop();
 //    ui->start_button->setText("Start");
-    ui->start_button->setEnabled(true);
+    ui->start_button->setEnabled(false);
     ui->stop_button->setEnabled(false);
     ui->pause_button->setEnabled(false);
+    ui->fileName_textEdit->setText("");
 }
 
 

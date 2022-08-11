@@ -1,7 +1,6 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include "audiohandler.h"
 #include "udpfileplayer.h"
 
 #include <QMainWindow>
@@ -32,7 +31,6 @@ private:
     QFile m_file{};
 
     UDPFilePlayer* m_udpFilePlayer;
-    AudioHandler *m_audioHandler;
 //    AudioBroadcast *m_audioBroadcast;
 };
 #endif // MAINWINDOW_H
