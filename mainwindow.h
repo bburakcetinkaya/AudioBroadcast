@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include "audiohandler.h"
+#include "udpfileplayer.h"
 
 #include <QMainWindow>
 #include <QFileDialog>
@@ -21,11 +22,8 @@ public:
 
 private slots:
     void on_openFile_button_clicked();
-
     void on_stop_button_clicked();
-
     void on_pause_button_clicked();
-
     void on_start_button_clicked(bool checked);
 
 private:
@@ -33,6 +31,7 @@ private:
     QString m_fileName{};
     QFile m_file{};
 
+    UDPFilePlayer* m_udpFilePlayer;
     AudioHandler *m_audioHandler;
 //    AudioBroadcast *m_audioBroadcast;
 };
