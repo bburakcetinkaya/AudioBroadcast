@@ -65,12 +65,13 @@ void AudioHandler::liveStream()
 }
 void AudioHandler::fileStream()
 {
-    memset(m_data,0,sizeof(*m_data));
-    readAudioFile();
+    AudioData m_data;
+    memset(&m_data,0,sizeof(m_data));
+//    readAudioFile();
     QByteArray dummy;
     dummy = m_ioDevice->readAll();
-    m_data->len = m_file.read(m_data->audioData,m_format->bytesForFrames(m_format->framesForDuration(40000)));
-    m_socket->writeDatagram(m_data->audioData,m_data->len,QHostAddress(m_address),m_port);
+    m_data.len = m_file.read(m_data.audioData,m_format->bytesForFrames(m_format->framesForDuration(40000)));
+    m_socket->writeDatagram(m_data.audioData,m_data.len,QHostAddress(m_address),m_port);
 }
 void AudioHandler::resume()
 {

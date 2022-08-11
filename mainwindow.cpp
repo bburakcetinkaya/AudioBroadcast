@@ -18,6 +18,8 @@ void MainWindow::on_openFile_button_clicked()
 {
     m_fileName = QFileDialog::getOpenFileName(this, tr("Open Audio File"), "../", tr("Audio Files (*.wav *.mp3)"));
     m_audioHandler = new AudioHandler(m_fileName, 16000,1,16,"audio/pcm",QAudioFormat::UnSignedInt , QAudioFormat::LittleEndian);
+    ui->fileName_textEdit->setText(m_fileName.mid(m_fileName.lastIndexOf("/")+1));
+    ui->fileName_textEdit->setAlignment(Qt::AlignVCenter);
 }
 
 void MainWindow::on_stop_button_clicked()

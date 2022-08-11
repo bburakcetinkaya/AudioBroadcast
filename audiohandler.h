@@ -38,6 +38,7 @@ public:
     void resume();
     void pause();
 
+public slots:
     void liveStream();
     void fileStream();
 private:
