@@ -22,24 +22,24 @@ void MainWindow::on_openFile_button_clicked()
 
 void MainWindow::on_stop_button_clicked()
 {
-    m_audioBroadcast->stop();
+//    m_audioBroadcast->stop();
     ui->start_button->setText("Start");
 }
 
 
 void MainWindow::on_pause_button_clicked()
 {
-    m_audioBroadcast->pause();
+//    m_audioBroadcast->pause();
 }
 
 
 void MainWindow::on_start_button_clicked(bool checked)
 {
-    m_audioBroadcast = new AudioBroadcast("224.0.0.2",9999,m_audioHandler);
+    m_audioHandler->setBroadCastProperties("224.0.0.2",9999);
 //    if(!checked)
 //    {
 //       if(ui->streamType_buttonGroup->checkedButton() == ui->file_checkBox)
-    m_audioBroadcast->start(AudioBroadcast::StreamType::file);
+    m_audioHandler->start(AudioHandler::StreamType::file);
     ui->start_button->setText("Resume");
 //    }
 //    if(checked)

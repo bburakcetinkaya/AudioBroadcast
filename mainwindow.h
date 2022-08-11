@@ -35,6 +35,6 @@ private:
     QFile m_file{};
 
     AudioHandler *m_audioHandler;
-    AudioBroadcast *m_audioBroadcast;
+//    AudioBroadcast *m_audioBroadcast;
 };
 #endif // MAINWINDOW_H

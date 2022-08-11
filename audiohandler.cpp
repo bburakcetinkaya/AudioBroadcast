@@ -9,11 +9,9 @@ AudioHandler::AudioHandler(QString fileName, int sampleRate,int channelCount,int
      ,m_audioFormat{audioFormat}
      ,m_byteOrder{byteOrder}
 {
-
-    m_deviceInfo = new QAudioDeviceInfo();
+    m_deviceInfo = new QAudioDeviceInfo(QAudioDeviceInfo::defaultInputDevice());
     constructAudio(fileName);
     setAudioFormat();
-
 }
 
 void AudioHandler::setAudioFormat()
@@ -35,20 +33,62 @@ void AudioHandler::constructAudio(QString fileName)
     m_file.setFileName(fileName);
     if (m_file.open(QIODevice::ReadOnly))
     {
-        qint32 a = m_format->framesForDuration(40000);
-        m_data = new AudioData{};
-        qDebug() << "çıkışş";
-        memset(m_data,0,sizeof(*m_data));
-        m_data->len = m_file.read(m_data->audioData,m_format->bytesForFrames(a));
-        qDebug() << "çıkışş";
-                    //        readAudioFile();
+
     }
     else
         assert("Cannot open audio file!");
 
 }
+void AudioHandler::setBroadCastProperties(QString address, quint16 port)
+{
+    m_socket = new QUdpSocket();
+    m_address = address;
+    m_port = port;
+}
 void AudioHandler::readAudioFile()
 {
+//     m_data->len = m_file.read(m_data->audioData,m_format->bytesForFrames(a));
+}
+void AudioHandler::start(StreamType t)
+{
+    m_input = new QAudioInput(*m_format);
+    m_ioDevice = m_input->start();
 
+    if(t == StreamType::file)
+        connect(m_ioDevice,SIGNAL(readyRead()),this,SLOT(fileStream()));
+    if(t == StreamType::live)
+        connect(m_ioDevice,SIGNAL(readyRead()),this,SLOT(liveStream()));
+}
+void AudioHandler::liveStream()
+{
+
+}
+void AudioHandler::fileStream()
+{
+    memset(m_data,0,sizeof(*m_data));
+    readAudioFile();
+    QByteArray dummy;
+    dummy = m_ioDevice->readAll();
+    m_data->len = m_file.read(m_data->audioData,m_format->bytesForFrames(m_format->framesForDuration(40000)));
+    m_socket->writeDatagram(m_data->audioData,m_data->len,QHostAddress(m_address),m_port);
+}
+void AudioHandler::resume()
+{
+    m_input->resume();
+}
+void AudioHandler::pause()
+{
+    m_input->suspend();
+}
+
+void AudioHandler::stop()
+{
+    if(m_socket->isOpen())
+    {
+        m_socket->disconnect();
+        m_socket->disconnectFromHost();
+        m_socket->close();
+        m_socket->deleteLater();
+    }
 }
 

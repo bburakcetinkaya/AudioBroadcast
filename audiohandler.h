@@ -7,15 +7,21 @@
 #include <QAudioInput>
 #include <QAudioOutput>
 #include <QIODevice>
+#include <QUdpSocket>
 #include <QDebug>
 #include <QAudioDecoder>
 #include <QFile>
 #include <QDir>
 
-class AudioHandler
+class AudioHandler : public QObject
 {
+    Q_OBJECT
 public:
-
+    enum StreamType
+    {
+        file,
+        live
+    };
     struct AudioData
     {
         char audioData[7680];
@@ -24,8 +30,16 @@ public:
 
     AudioHandler(QString fileName, int sampleRate,int channelCount,int sampleSize,QString codec,QAudioFormat::SampleType audioFormat, QAudioFormat::Endian byteOrder);
     QAudioFormat* getAudioFormat()const { return m_format; }
+    void setBroadCastProperties(QString address, quint16 port);
     void readAudioFile();
-    AudioData* getAudioData() const { return m_data; }
+
+    void start(StreamType t);
+    void stop();
+    void resume();
+    void pause();
+
+    void liveStream();
+    void fileStream();
 private:
 
     void setAudioFormat();
@@ -44,7 +58,12 @@ private:
     AudioData* m_data;
     QAudioDeviceInfo *m_deviceInfo;
     QAudioInput *m_input;
+    QIODevice *m_ioDevice;
 
+    // udp
+    QUdpSocket *m_socket;
+    QString m_address;
+    quint16 m_port;
 };
 
 #endif // AUDIO_H
