@@ -20,29 +20,49 @@ void MainWindow::on_openFile_button_clicked()
     m_audioHandler = new AudioHandler(m_fileName, 16000,1,16,"audio/pcm",QAudioFormat::UnSignedInt , QAudioFormat::LittleEndian);
     ui->fileName_textEdit->setText(m_fileName.mid(m_fileName.lastIndexOf("/")+1));
     ui->fileName_textEdit->setAlignment(Qt::AlignVCenter);
+    ui->start_button->setEnabled(true);
+    ui->file_checkBox->setEnabled(true);
+
 }
 
 void MainWindow::on_stop_button_clicked()
 {
-//    m_audioBroadcast->stop();
+    m_audioHandler->stop();
     ui->start_button->setText("Start");
+    ui->start_button->setEnabled(true);
+    ui->stop_button->setEnabled(false);
+    ui->pause_button->setEnabled(false);
 }
 
 
 void MainWindow::on_pause_button_clicked()
 {
-//    m_audioBroadcast->pause();
+    m_audioHandler->pause();
+    ui->start_button->setEnabled(true);
+    ui->pause_button->setEnabled(false);
+    ui->start_button->setText("Resume");
 }
 
 
 void MainWindow::on_start_button_clicked(bool checked)
 {
-    m_audioHandler->setBroadCastProperties("224.0.0.2",9999);
-//    if(!checked)
+    m_audioHandler->setBroadCastProperties("10.0.0.2",9999);
+//    if(checked)
 //    {
 //       if(ui->streamType_buttonGroup->checkedButton() == ui->file_checkBox)
-    m_audioHandler->start(AudioHandler::StreamType::file);
-    ui->start_button->setText("Resume");
+           m_audioHandler->start(AudioHandler::StreamType::file);
+//       if(ui->streamType_buttonGroup->checkedButton() == ui->live_checkBox)
+//           m_audioHandler->start(AudioHandler::StreamType::live);
+//    }
+//    if(!checked)
+//    {
+//        m_audioHandler->resume();
+//    }
+    ui->start_button->setEnabled(false);
+    ui->stop_button->setEnabled(true);
+    ui->pause_button->setEnabled(true);
+
+
 //    }
 //    if(checked)
 //    m_audioBroadcast->resume();

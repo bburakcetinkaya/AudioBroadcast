@@ -67,10 +67,10 @@ void AudioHandler::fileStream()
 {
     AudioData m_data;
     memset(&m_data,0,sizeof(m_data));
-//    readAudioFile();
     QByteArray dummy;
     dummy = m_ioDevice->readAll();
     m_data.len = m_file.read(m_data.audioData,m_format->bytesForFrames(m_format->framesForDuration(40000)));
+    if(m_data.len)
     m_socket->writeDatagram(m_data.audioData,m_data.len,QHostAddress(m_address),m_port);
 }
 void AudioHandler::resume()
