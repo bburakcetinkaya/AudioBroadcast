@@ -9,16 +9,16 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    UDPPlayer.cpp \
     main.cpp \
     mainwindow.cpp \
-    udpfileplayer.cpp \
     framelesswindow.cpp \
     windowdragger.cpp \
     DarkStyle.cpp
 
 HEADERS += \
+    UDPPlayer.h \
     mainwindow.h \
-    udpfileplayer.h\
     framelesswindow.h \
     windowdragger.h \
     DarkStyle.h

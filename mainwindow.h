@@ -1,7 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include "udpfileplayer.h"
+#include "UDPPlayer.h"
 
 #include <QMainWindow>
 #include <QFileDialog>
@@ -25,12 +25,17 @@ private slots:
     void on_pause_button_clicked();
     void on_start_button_clicked(bool checked);
 
+    void on_live_checkBox_stateChanged(int arg1);
+
+    void on_file_checkBox_stateChanged(int arg1);
+
 private:
     Ui::MainWindow *ui;
     QString m_fileName{};
     QFile m_file{};
+    QString m_name{};
 
-    UDPFilePlayer* m_udpFilePlayer;
+    UDPPlayer* m_udpFilePlayer;
 //    AudioBroadcast *m_audioBroadcast;
 };
 #endif // MAINWINDOW_H

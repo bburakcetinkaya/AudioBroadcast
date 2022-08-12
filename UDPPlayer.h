@@ -1,24 +1,30 @@
-#ifndef UDPFILEPLAYER_H
-#define UDPFILEPLAYER_H
+#ifndef UDPPLAYER_H
+#define UDPPLAYER_H
 
 #include <QFile>
 #include <QUdpSocket>
 #include <QAudioDeviceInfo>
-#include <QAudioOutput>
-#include <QAudioDecoder>
-#include <QAudioBuffer>
-class UDPFilePlayer : public QObject
+#include <QAudioInput>
+
+class UDPPlayer : public QObject
 {
     Q_OBJECT
 public:
+    enum StreamType
+    {
+        liveStream,
+        fileStream
+    };
+
     struct AudioData
     {
         char audioData[7680];
         int len{};
     };
 
-    UDPFilePlayer(QString filePath);
-    ~UDPFilePlayer();
+    UDPPlayer(QString filePath);
+    UDPPlayer();
+    ~UDPPlayer();
     void setBroadCastProperties(QString address, quint16 port);
     void start();
     void stop();
@@ -26,6 +32,7 @@ public:
     void resume();
 private slots:
     void streamFile();
+    void streamLive();
 private:
     void setAudioFormat();
     void connectSignalSlots();
@@ -34,9 +41,7 @@ private:
     QAudioFormat* m_format;
 
     QIODevice *m_ioDevice;
-    QAudioBuffer* m_audioBuffer;
-    QAudioDecoder* m_audioDecoder;
-    QAudioOutput* m_output;
+    QAudioInput* m_input;
     QString m_filePath{};
     QFile m_file;
 
@@ -44,6 +49,8 @@ private:
     QUdpSocket *m_socket;
     QString m_address;
     quint16 m_port;
+
+    StreamType m_type;
 };
 
-#endif // UDPFILEPLAYER_H
+#endif // UDPPLAYER_H
