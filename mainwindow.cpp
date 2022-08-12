@@ -2,7 +2,7 @@
 #include "ui_mainwindow.h"
 
 #include <iostream>
-
+#include <QTimer>
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -66,6 +66,16 @@ void MainWindow::on_start_button_clicked(bool checked)
         m_udpFilePlayer->setBroadCastProperties("192.168.1.26",9999);
         m_udpFilePlayer->start();
         ui->fileName_textEdit->setText("Playing...  " + m_name);
+        m_sliderValue = m_udpFilePlayer->getFileSize();
+        std::cout << m_sliderValue << " slider" << std::endl;
+        int sliderPosition = 0;
+        ui->horizontalSlider->setMaximum(100);
+        ui->horizontalSlider->setSliderPosition(sliderPosition);
+        ui->horizontalSlider->setSingleStep(100/(m_sliderValue/1280));
+        QTimer *timer = new QTimer(this);
+        connect(timer, &QTimer::timeout, this, [&](){ui->horizontalSlider->setSliderPosition(
+                                                    ui->horizontalSlider->sliderPosition()+1);});
+        timer->start(250);
     }
     else
     {

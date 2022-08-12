@@ -35,6 +35,8 @@ private:
     QFile m_file{};
     QString m_name{};
 
+    qint64 m_sliderValue{};
+
     UDPPlayer* m_udpFilePlayer;
 //    AudioBroadcast *m_audioBroadcast;
 };

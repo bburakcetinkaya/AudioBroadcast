@@ -30,6 +30,7 @@ public:
     void stop();
     void pause();
     void resume();
+    qint64 getFileSize() const { return m_fileSize; }
 private slots:
     void streamFile();
     void streamLive();
@@ -45,6 +46,7 @@ private:
     QString m_filePath{};
     QFile m_file;
 
+    qint64 m_fileSize{};
     // udp
     QUdpSocket *m_socket;
     QString m_address;

@@ -49,7 +49,7 @@ FramelessWindow::FramelessWindow(QWidget *parent)
   // window shadow
   QGraphicsDropShadowEffect *windowShadow = new QGraphicsDropShadowEffect;
   windowShadow->setBlurRadius(9.0);
-  windowShadow->setColor(QColor("#FFA500")/*palette().color(QPalette::Highlight)*/);
+  windowShadow->setColor(QColor("#00FF00")/*palette().color(QPalette::Highlight)*/);
   windowShadow->setOffset(0.0);
   ui->windowFrame->setGraphicsEffect(windowShadow);
 
@@ -120,13 +120,13 @@ void FramelessWindow::styleWindow(bool bActive, bool bNoState) {
           "border-top-left-radius:5px; border-top-right-radius:5px; "
           "background-color:palette(shadow); height:20px;}"));
       ui->windowFrame->setStyleSheet(QStringLiteral(
-          "#windowFrame{border:1px solid palette(QColor(\"#FFA500\")); border-radius:5px "
+          "#windowFrame{border:1px solid palette(QColor(\"#00FF00\")); border-radius:5px "
           "5px 5px 5px; background-color:palette(Window);}"));
       QGraphicsEffect *oldShadow = ui->windowFrame->graphicsEffect();
       if (oldShadow) delete oldShadow;
       QGraphicsDropShadowEffect *windowShadow = new QGraphicsDropShadowEffect;
       windowShadow->setBlurRadius(9.0);
-      windowShadow->setColor(QColor("#FFA500")/*palette().color(QPalette::Highlight)*/);
+      windowShadow->setColor(QColor("#00FF00")/*palette().color(QPalette::Highlight)*/);
       windowShadow->setOffset(0.0);
       ui->windowFrame->setGraphicsEffect(windowShadow);
     } else {

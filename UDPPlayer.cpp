@@ -13,6 +13,7 @@ UDPPlayer::UDPPlayer(QString filePath)
     }
     else
     {
+        m_fileSize = m_file.size();
         setAudioFormat();
         m_type = StreamType::fileStream;
     }

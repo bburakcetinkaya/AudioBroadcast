@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>419</width>
+    <width>349</width>
     <height>95</height>
    </rect>
   </property>
@@ -76,6 +76,11 @@
           </property>
           <item>
            <widget class="QLabel" name="fileName_textEdit">
+            <property name="font">
+             <font>
+              <family>Audiowide</family>
+             </font>
+            </property>
             <property name="text">
              <string/>
             </property>
@@ -127,6 +132,18 @@
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
+            <property name="minimumSize">
+             <size>
+              <width>33</width>
+              <height>27</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>33</width>
+              <height>27</height>
+             </size>
+            </property>
             <property name="text">
              <string/>
             </property>
@@ -137,20 +154,46 @@
            </widget>
           </item>
           <item>
-           <spacer name="horizontalSpacer">
+           <widget class="QSlider" name="horizontalSlider">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>27</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>27</height>
+             </size>
+            </property>
+            <property name="autoFillBackground">
+             <bool>false</bool>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QSlider::groove:horizontal {
+    border-radius: 5px;
+    background-color: rgb(52, 59, 72);
+}
+QSlider::groove:horizontal:hover {
+    background-color: rgb(55, 62, 76);
+}
+
+</string>
+            </property>
+            <property name="value">
+             <number>0</number>
+            </property>
+            <property name="sliderPosition">
+             <number>0</number>
+            </property>
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
             </property>
-            <property name="sizeType">
-             <enum>QSizePolicy::MinimumExpanding</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>140</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
+           </widget>
           </item>
           <item>
            <widget class="QPushButton" name="pause_button">
@@ -162,6 +205,18 @@
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>33</width>
+              <height>27</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>33</width>
+              <height>27</height>
+             </size>
             </property>
             <property name="text">
              <string/>
@@ -182,6 +237,18 @@
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>33</width>
+              <height>27</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>33</width>
+              <height>27</height>
+             </size>
             </property>
             <property name="text">
              <string/>
