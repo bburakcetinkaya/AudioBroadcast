@@ -29,6 +29,8 @@ private slots:
 
     void on_file_checkBox_stateChanged(int arg1);
 
+    void on_horizontalSlider_valueChanged(int value);
+
 private:
     Ui::MainWindow *ui;
     QString m_fileName{};

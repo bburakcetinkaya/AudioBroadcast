@@ -25,7 +25,8 @@ public:
     UDPPlayer(QString filePath);
     UDPPlayer();
     ~UDPPlayer();
-    void setBroadCastProperties(QString address, quint16 port);
+    void setBroadCastProperties(QString address, quint16 port,quint16 ssPort,quint16 volumePort);
+    void setVolumeLevel(unsigned char volumeLevel);
     void start();
     void stop();
     void pause();
@@ -49,8 +50,12 @@ private:
     qint64 m_fileSize{};
     // udp
     QUdpSocket *m_socket;
-    QString m_address;
-    quint16 m_port;
+    QUdpSocket *m_startStopSocket;
+    QUdpSocket *m_volumeSocket;
+    QString m_address{};
+    quint16 m_port{};
+    quint16 m_startStopPort{};
+    quint16 m_volumePort{};
 
     StreamType m_type;
 };

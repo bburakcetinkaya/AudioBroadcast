@@ -8,7 +8,8 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
+    ui->horizontalSlider->setMaximum(255);
+    ui->horizontalSlider->setSingleStep(2);
 }
 
 MainWindow::~MainWindow()
@@ -21,7 +22,7 @@ void MainWindow::on_openFile_button_clicked()
 {
     m_fileName = QFileDialog::getOpenFileName(this, tr("Open Audio File"), "../", tr("Audio Files (*.wav *.mp3)"));
     m_udpFilePlayer = new UDPPlayer(m_fileName);
-    m_udpFilePlayer->setBroadCastProperties("192.168.1.22",9999);
+    m_udpFilePlayer->setBroadCastProperties("10.0.0.2",9999,7777,8888);
 //    m_audioHandler = new AudioHandler(m_fileName, 16000,1,16,"audio/pcm",QAudioFormat::UnSignedInt , QAudioFormat::LittleEndian);
     m_name = m_fileName.mid(m_fileName.lastIndexOf("/")+1);
     m_name.remove(m_name.lastIndexOf('.'),4);
@@ -63,24 +64,17 @@ void MainWindow::on_start_button_clicked(bool checked)
 {
     if(ui->streamType_buttonGroup->checkedButton() == ui->file_checkBox)
     {
-        m_udpFilePlayer->setBroadCastProperties("192.168.1.26",9999);
+        m_udpFilePlayer->setBroadCastProperties("10.0.0.2",9999,7777,8888);
         m_udpFilePlayer->start();
         ui->fileName_textEdit->setText("Playing...  " + m_name);
         m_sliderValue = m_udpFilePlayer->getFileSize();
         std::cout << m_sliderValue << " slider" << std::endl;
-        int sliderPosition = 0;
-        ui->horizontalSlider->setMaximum(100);
-        ui->horizontalSlider->setSliderPosition(sliderPosition);
-        ui->horizontalSlider->setSingleStep(100/(m_sliderValue/1280));
-        QTimer *timer = new QTimer(this);
-        connect(timer, &QTimer::timeout, this, [&](){ui->horizontalSlider->setSliderPosition(
-                                                    ui->horizontalSlider->sliderPosition()+1);});
-        timer->start(250);
+
     }
     else
     {
         m_udpFilePlayer = new UDPPlayer();
-        m_udpFilePlayer->setBroadCastProperties("192.168.1.26",9999);
+        m_udpFilePlayer->setBroadCastProperties("10.0.0.2",9999,7777,8888);
         m_udpFilePlayer->start();
         ui->fileName_textEdit->setText("Live streaming...");
     }
@@ -105,5 +99,12 @@ void MainWindow::on_file_checkBox_stateChanged(int arg1)
 {
    if(arg1)
      ui->openFile_button->setEnabled(true);
+}
+
+
+void MainWindow::on_horizontalSlider_valueChanged(int value)
+{
+
+    m_udpFilePlayer->setVolumeLevel(value);
 }
 
