@@ -10,6 +10,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     ui->horizontalSlider->setMaximum(255);
     ui->horizontalSlider->setSingleStep(2);
+//    ui->horizontalSlider->setSliderPosition(80);
 }
 
 MainWindow::~MainWindow()
@@ -45,8 +46,9 @@ void MainWindow::on_stop_button_clicked()
     ui->pause_button->setEnabled(false);
     ui->file_checkBox->setEnabled(true);
     ui->live_checkBox->setEnabled(true);
-    if(!ui->live_checkBox->isChecked())
-      ui->openFile_button->setEnabled(true);
+
+//    if(!ui->live_checkBox->isChecked())
+    ui->openFile_button->setEnabled(true);
     ui->fileName_textEdit->setText("");
 }
 
@@ -55,8 +57,7 @@ void MainWindow::on_pause_button_clicked()
 {
     m_udpFilePlayer->pause();
     ui->start_button->setEnabled(true);
-    ui->pause_button->setEnabled(false);
-    ui->start_button->setText("Resume");
+    ui->pause_button->setEnabled(false);    
 }
 
 
@@ -82,6 +83,7 @@ void MainWindow::on_start_button_clicked(bool checked)
     ui->start_button->setEnabled(false);
     ui->stop_button->setEnabled(true);
     ui->pause_button->setEnabled(true);
+    ui->horizontalSlider->setEnabled(true);
 }
 
 
@@ -106,5 +108,6 @@ void MainWindow::on_horizontalSlider_valueChanged(int value)
 {
 
     m_udpFilePlayer->setVolumeLevel(value);
+    ui->volume_label->setText(QString::number(value));
 }
 

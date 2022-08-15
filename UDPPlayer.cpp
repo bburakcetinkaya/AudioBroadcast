@@ -119,12 +119,7 @@ void UDPPlayer::setVolumeLevel(BYTE volumeLevel)
 //    qDebug() << data;
     if(!m_address.isEmpty())
         m_volumeSocket->writeDatagram(data,sizeof(data),QHostAddress(m_address),m_volumePort);
-    else
-    {
-        m_address = "10.0.0.2";
-        m_volumePort = 8888;
-        m_volumeSocket->writeDatagram(data,sizeof(data),QHostAddress(m_address),m_volumePort);
-    }
+
 }
 
 void UDPPlayer::setAudioFormat()

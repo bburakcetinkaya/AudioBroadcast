@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>329</width>
-    <height>79</height>
+    <width>486</width>
+    <height>87</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -25,7 +25,10 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout_2">
     <item row="0" column="0">
-     <layout class="QGridLayout" name="gridLayout">
+     <layout class="QGridLayout" name="gridLayout" columnstretch="1,6">
+      <property name="sizeConstraint">
+       <enum>QLayout::SetNoConstraint</enum>
+      </property>
       <item row="0" column="0">
        <layout class="QHBoxLayout" name="horizontalLayout">
         <item>
@@ -90,7 +93,10 @@
          </layout>
         </item>
         <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="0,1,0,1,1">
+         <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="1,1,6,1,1,1">
+          <property name="sizeConstraint">
+           <enum>QLayout::SetFixedSize</enum>
+          </property>
           <item>
            <widget class="QPushButton" name="openFile_button">
             <property name="enabled">
@@ -154,17 +160,23 @@
           <item>
            <widget class="QSlider" name="horizontalSlider">
             <property name="enabled">
-             <bool>true</bool>
+             <bool>false</bool>
+            </property>
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
             </property>
             <property name="minimumSize">
              <size>
-              <width>0</width>
+              <width>200</width>
               <height>27</height>
              </size>
             </property>
             <property name="maximumSize">
              <size>
-              <width>16777215</width>
+              <width>200</width>
               <height>27</height>
              </size>
             </property>
@@ -172,24 +184,36 @@
              <bool>false</bool>
             </property>
             <property name="styleSheet">
-             <string notr="true">QSlider::groove:horizontal {
-    border-radius: 5px;
-    background-color: rgb(52, 59, 72);
-}
-QSlider::groove:horizontal:hover {
-    background-color: rgb(55, 62, 76);
-}
+             <string notr="true">
 
 </string>
             </property>
+            <property name="maximum">
+             <number>255</number>
+            </property>
+            <property name="singleStep">
+             <number>2</number>
+            </property>
             <property name="value">
-             <number>0</number>
+             <number>80</number>
             </property>
             <property name="sliderPosition">
-             <number>0</number>
+             <number>80</number>
             </property>
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="volume_label">
+            <property name="font">
+             <font>
+              <family>Audiowide</family>
+             </font>
+            </property>
+            <property name="text">
+             <string>80</string>
             </property>
            </widget>
           </item>
