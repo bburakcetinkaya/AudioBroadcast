@@ -3,6 +3,7 @@
 #include "framelesswindow.h"
 
 #include <QApplication>
+#include <QDesktopWidget>
 
 int main(int argc, char *argv[])
 {
@@ -21,6 +22,16 @@ int main(int argc, char *argv[])
     framelessWindow.setContent(mainWindow);
     framelessWindow.setGeometry(mainWindow->geometry());
     framelessWindow.setFixedSize(mainWindow->width(),mainWindow->height()+50);
+
+    QDesktopWidget widget;
+    QRect screenGeometry = widget.screenGeometry();//.availableGeometry(widget.primaryScreen());
+
+    int height = screenGeometry.height();
+    int width = screenGeometry.width();
+    framelessWindow.move(-50000,-50000);
+
+    framelessWindow.move((width - framelessWindow.width()) / 2.0,
+                    (height - framelessWindow.height()) / 2.0);
     framelessWindow.show();
 
     return a.exec();

@@ -57,13 +57,15 @@ void UDPPlayer::setBroadCastProperties(QString address, quint16 port,quint16 ssP
 void UDPPlayer::start()
 {
     m_ioDevice = m_input->start();
+    //TO DO make this switch case
     if(m_type == fileStream)
         connect(m_ioDevice,SIGNAL(readyRead()),this,SLOT(streamFile()));
     else
         connect(m_ioDevice,SIGNAL(readyRead()),this,SLOT(streamLive()));
-    setVolumeLevel(80);
+
     char startCmd[6] = {'u','n','m','u','t','e'};
     m_startStopSocket->writeDatagram(startCmd,6,QHostAddress(m_address),m_startStopPort);
+    setVolumeLevel(80);
 }
 void UDPPlayer::stop()
 {
@@ -90,12 +92,13 @@ void UDPPlayer::streamFile()
 
     QByteArray dummy;
     dummy = m_ioDevice->readAll();
-        data.len = m_file.read(data.audioData,m_format->bytesForFrames(m_format->framesForDuration(40000)));
-        qDebug() << "file stream current data size: " << data.len;
-        if(data.len)
-            m_socket->writeDatagram(data.audioData,data.len,QHostAddress(m_address),m_port);
-        else
-            stop();
+
+    data.len = m_file.read(data.audioData,m_format->bytesForFrames(m_format->framesForDuration(40000)));
+    qDebug() << "file stream current data size: " << data.len;
+    if(data.len > 0 && data.len <= 1280)
+        m_socket->writeDatagram(data.audioData,data.len,QHostAddress(m_address),m_port);
+    else
+        stop();
 
 }
 void UDPPlayer::streamLive()
@@ -116,7 +119,6 @@ void UDPPlayer::setVolumeLevel(BYTE volumeLevel)
 {
 
     char data[1] = {~volumeLevel};
-//    qDebug() << data;
     if(!m_address.isEmpty())
         m_volumeSocket->writeDatagram(data,sizeof(data),QHostAddress(m_address),m_volumePort);
 
