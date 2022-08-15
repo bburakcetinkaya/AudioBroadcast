@@ -29,7 +29,6 @@ void MainWindow::on_openFile_button_clicked()
     m_name.remove(m_name.lastIndexOf('.'),4);
     ui->fileName_textEdit->setText(m_name);
     ui->fileName_textEdit->setAlignment(Qt::AlignVCenter);
-    if(m_fileName.isEmpty())
     ui->start_button->setEnabled(true);
     ui->file_checkBox->setEnabled(false);
     ui->live_checkBox->setEnabled(false);
